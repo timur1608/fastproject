@@ -268,6 +268,7 @@ class Registration(QWidget):
         except ArithmeticError:
             self.ui_form.label.setText('Такой логин уже существует')
         finally:
+            window.update_list_of_users()
             self.con.close()
 
 
