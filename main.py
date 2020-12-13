@@ -110,12 +110,10 @@ class MainWindow(QMainWindow):
     def update_list_of_books(self):
         con = sqlite3.connect('library.sqlite')
         cur = con.cursor()
-        result = cur.execute('''SELECT [books].name, [books].author, [people].nickname 
-                                FROM [books], [people]
-                                WHERE [books].status_id = [people].Id ''').fetchall()
-        ui.table_all_books.setColumnCount(3)
+        result = cur.execute('''SELECT name, author FROM [books]''').fetchall()
+        ui.table_all_books.setColumnCount(2)
         ui.table_all_books.setRowCount(len(result))
-        for i, j in enumerate(['Название', 'Автор', 'Получатель']):
+        for i, j in enumerate(['Название', 'Автор']):
             item = QTableWidgetItem()
             item.setText(j)
             ui.table_all_books.setHorizontalHeaderItem(i, item)
